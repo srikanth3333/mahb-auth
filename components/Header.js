@@ -8,9 +8,9 @@ function Header({title,navigate}) {
             <img src="/icons/menu.png" alt="" className="icon-sm me-3" />
         </div>
         <div>
-          <img src="/icons/Search.png" alt="" className="icon me-3" />
+          {/* <img src="/icons/Search.png" alt="" className="icon me-3" />
           <img src="/icons/BellNotification.png" alt="" className="icon me-3" />
-          <img src="/icons/User.png" alt="" className="icon me-3" />
+          <img src="/icons/User.png" alt="" className="icon me-3" /> */}
           <button className="btn btn-danger btn-sm" onClick={() => {
             localStorage.clear();
             location.reload()
