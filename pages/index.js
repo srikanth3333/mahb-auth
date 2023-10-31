@@ -24,6 +24,11 @@ function Index() {
     })
     .then(response => {
       setData(response.data)
+      setBusSpeedLimit(response.data.bus_speed_limit)
+      setBusSpeedLimitCount(response.data.bus_speed_limit_count)
+      setFirstTicketCreationTime(response.data.first_ticket_creation_time)
+      setSecondTicketCreationTime(response.data.second_ticket_creation_time)
+
     })
     .catch(err => {
       console.error(err)
@@ -74,7 +79,7 @@ function Index() {
                         editState == false ?
                         <p className="ms-2 font-weight-bold">{data.bus_speed_limit}</p>
                         :  
-                        <input  onChange={(e) => setBusSpeedLimit(e.target.value)} defaultValue={data.bus_speed_limit} className="custom-input" />
+                        <input type="number"  onChange={(e) => setBusSpeedLimit(e.target.value)} defaultValue={data.bus_speed_limit} className="custom-input" />
                       }
                       <p className="ms-2">km/hr</p>
                     </div>
@@ -86,7 +91,7 @@ function Index() {
                       editState == false ?
                         <p className="ms-2 font-weight-bold">{data.bus_speed_limit_count}</p>
                       :  
-                        <input  onChange={(e) => setBusSpeedLimitCount(e.target.value)} defaultValue={data.bus_speed_limit_count} className="custom-input" />
+                        <input  type="number" onChange={(e) => setBusSpeedLimitCount(e.target.value)} defaultValue={data.bus_speed_limit_count} className="custom-input" />
                     }
                   </div>
               </div>
@@ -110,7 +115,7 @@ function Index() {
                       editState == false ?
                         <p className="ms-2 font-weight-bold">{data.first_ticket_creation_time}</p>
                       :  
-                        <input  onChange={(e) => setFirstTicketCreationTime(e.target.value)} defaultValue={data.first_ticket_creation_time} className="custom-input" />
+                        <input  type="number" onChange={(e) => setFirstTicketCreationTime(e.target.value)} defaultValue={data.first_ticket_creation_time} className="custom-input" />
                       }
                       <p className="ms-2">min</p>
                     </div>
@@ -123,7 +128,7 @@ function Index() {
                         editState == false ?
                         <p className="ms-2 font-weight-bold">{data.second_ticket_creation_time}</p>
                       :  
-                        <input  onChange={(e) => setSecondTicketCreationTime(e.target.value)} defaultValue={data.second_ticket_creation_time} className="custom-input" />
+                        <input  type="number" onChange={(e) => setSecondTicketCreationTime(e.target.value)} defaultValue={data.second_ticket_creation_time} className="custom-input" />
                       }
                       <p className="ms-2">hr</p>
                     </div>
