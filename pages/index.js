@@ -1,7 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 
-function index() {
+function Index() {
 
   const [data,setData] = React.useState('')
   const [editState,setEditState] = React.useState(false)
@@ -139,4 +139,4 @@ function index() {
   )
 }
 
-export default index
+export default Index
