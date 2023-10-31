@@ -33,7 +33,7 @@ function Login({setLoggedIn}) {
         .then(response => {
             localStorage.setItem('profile',JSON.stringify(response.data))
             setLoggedIn(true)
-            router.push('/home')
+            router.push('/')
 
         })
         .catch(err => {
