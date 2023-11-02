@@ -63,9 +63,9 @@ function Login({setLoggedIn}) {
                                 </div>
                                 <div className="col-lg-7">
                                     <div className="py-15">
-                                        <h2>Log In to your account</h2>
+                                        <h2 className='text-center'>Log In to your account</h2>
                                         {/* <h6>Signin to create, discover and connect with the global community</h6> */}
-                                        <form className="w-75" onSubmit={handleLogin}>
+                                        <form className=" w-75 mx-auto" onSubmit={handleLogin}>
                                             <div className="form-group">
                                                 {/* <label htmlFor="">Email/Employee ID</label> */}
                                                 <input type="text" onChange={e => setEmail(e.target.value)} className='form-control shadow-none' placeholder='Email:' />
@@ -88,9 +88,6 @@ function Login({setLoggedIn}) {
                                                     </svg>
                                                 }
                                                 
-
-                                                
-
                                             </div>
                                             {/* <div className="form-group">
                                                 <Checkbox className="checkbox-text">Remember Me</Checkbox>
