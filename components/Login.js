@@ -64,7 +64,7 @@ function Login({setLoggedIn}) {
                                 <div className="col-lg-7">
                                     <div className="py-15">
                                         <h2>Log In to your account</h2>
-                                        <h6>Signin to create, discover and connect with the global community</h6>
+                                        {/* <h6>Signin to create, discover and connect with the global community</h6> */}
                                         <form className="w-75" onSubmit={handleLogin}>
                                             <div className="form-group">
                                                 {/* <label htmlFor="">Email/Employee ID</label> */}
