@@ -136,8 +136,8 @@ function Index() {
               </div>
             </div>
             <div className='d-flex justify-content-center my-4'>
-              <button className="btn btn-secondary me-5" onClick={() => setEditState(false)}>Cancel</button>
-              <button className="btn btn-secondary " onClick={handleSubmit}>Submit</button>
+              <button disabled={editState ? false : true} className="btn btn-secondary me-5" onClick={() => setEditState(false)}>Cancel</button>
+              <button disabled={editState ? false : true} className="btn btn-secondary " onClick={handleSubmit}>Submit</button>
             </div>
           </div>
     </>
