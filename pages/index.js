@@ -1,6 +1,17 @@
 import axios from 'axios'
 import React from 'react'
 
+let logoutTimer;
+
+
+function startLogoutTimer(logoutCallback, timeout = 30 * 60 * 1000) {
+    logoutTimer = setTimeout(logoutCallback,timeout)
+}
+
+function resetLogoutTimer() {
+    clearTimeout(logoutTimer)
+}
+
 function Index() {
 
   const [data,setData] = React.useState('')
@@ -41,7 +52,8 @@ function Index() {
       "busSpeedLimitCount": busSpeedLimitCount,
       "firstTicketCreationTime": firstTicketCreationTime,
       "secondTicketCreationTime": secondTicketCreationTime
-  }
+    };
+    
     axios.post("https://freshdeskdev.myairports.com.my/api/iot/details",data,{
       headers: {
         'Content-Type': 'application/json',
@@ -57,6 +69,33 @@ function Index() {
       console.log(err)
     })
   }
+
+  
+  React.useEffect(() => {
+
+
+    const logout = () => {
+        localStorage.clear()
+        location.reload()
+    }
+
+    startLogoutTimer(logout, 30 * 60 * 1000);
+
+    const handleUserActivity = () => {
+        resetLogoutTimer();
+    }
+
+
+    window.addEventListener('mousemove', handleUserActivity);
+    window.addEventListener('keydown', handleUserActivity);
+
+
+    return () => {
+        window.removeEventListener('mousemove',handleUserActivity);
+        window.removeEventListener('keydown',handleUserActivity);
+    }
+
+  },[])
 
   return (
     <>

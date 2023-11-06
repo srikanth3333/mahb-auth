@@ -1,8 +1,10 @@
 import { Checkbox } from 'antd'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+
+
 
 function Login({setLoggedIn}) {
 
@@ -10,6 +12,8 @@ function Login({setLoggedIn}) {
     const [showPassword, setShowPassword] = React.useState(false);
     const [email,setEmail] = React.useState('')
     const [password,setPassword] = React.useState('')
+    const [errors,setErrors] = React.useState('')
+    const [loading,setLoading] = React.useState(false)
     let router = useRouter()
 
     const togglePasswordVisibility = () => {
@@ -23,6 +27,12 @@ function Login({setLoggedIn}) {
             alert("Below fields cannot be empty")
             return;
         }
+
+        if(password.length < 8) {
+            return;
+        }
+
+        setLoading(true)
         let data = {
             "emailAddress": email,
             "password": password,
@@ -34,19 +44,22 @@ function Login({setLoggedIn}) {
                 'Content-Type': 'application/json'
 
             }
-          })
+        })
         .then(response => {
             localStorage.setItem('profile',JSON.stringify(response.data))
             setLoggedIn(true)
             router.push('/')
+            setLoading(false)
 
         })
         .catch(err => {
             console.log(err)
+            setLoading(false)
             alert("Invalid credentials")
         })
         
     }
+
 
   return (
     <div className="bg-padding">
@@ -59,7 +72,7 @@ function Login({setLoggedIn}) {
                                 <div className="col-lg-5 py-5 login-img text-center">
                                     <img src="/images/logo.png" className="logo" alt="not found" />
                                     <div className="mt-5"></div>
-                                    <img src="/images/login-img.png" alt="not found" />
+                                    <img src="/images/login-img.png" className='logo-img' alt="not found" />
                                 </div>
                                 <div className="col-lg-7">
                                     <div className="py-15">
@@ -68,12 +81,23 @@ function Login({setLoggedIn}) {
                                         <form className=" w-75 mx-auto" onSubmit={handleLogin}>
                                             <div className="form-group">
                                                 {/* <label htmlFor="">Email/Employee ID</label> */}
-                                                <input type="text" onChange={e => setEmail(e.target.value)} className='form-control shadow-none' placeholder='Email:' />
+                                                <input type="email" onChange={e => setEmail(e.target.value)} className='form-control shadow-none' placeholder='Email:' />
                                             </div>
-                                            <div className="form-group" style={{position:'relative'}}>
+                                            <div className="form-group mb-0" style={{position:'relative'}}>
                                                 {/* <label htmlFor="">Password</label> */}
                                                 <input type={showPassword ? 'text' : 'password'}
-                                                        onChange={e => setPassword(e.target.value)} className='form-control shadow-none' placeholder='Password:' />
+                                                        onChange={e => {
+                                                            setPassword(e.target.value)
+                                                            if(e.target.value.length == 0){
+                                                                setErrors('')
+                                                            }else if(e.target.value.length < 8 && e.target.value.length > 0) {
+                                                                setErrors('Password cannot be less than 8 chars')
+                                                            } else {
+                                                                setErrors('')
+                                                            }
+                                                        }} 
+                                                        className='form-control shadow-none' placeholder='Password:' 
+                                                    />
                                                 
                                                 {
                                                     !showPassword ? 
@@ -92,8 +116,9 @@ function Login({setLoggedIn}) {
                                             {/* <div className="form-group">
                                                 <Checkbox className="checkbox-text">Remember Me</Checkbox>
                                             </div> */}
+                                            <span className="text-sm text-danger">{errors}</span>
                                             <div className="form-group">
-                                                <button type="submit" className='btn btn-primary w-100 mt-2 btn-no-outline'>Log In</button>
+                                                <button type="submit" disabled={loading} className='btn btn-primary w-100 mt-2 btn-no-outline'>{loading ? 'Please wait loading...' : 'Log In'}</button>
                                             </div>
                                         </form>
                                     </div>
