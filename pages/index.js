@@ -1,4 +1,5 @@
 import axios from 'axios'
+import moment from 'moment';
 import React from 'react'
 
 let logoutTimer;
@@ -45,6 +46,9 @@ function Index() {
       console.error(err)
     })
   }
+
+
+
 
   const handleSubmit = () => {
     let data = {
@@ -96,6 +100,9 @@ function Index() {
     }
 
   },[])
+  
+
+
 
   return (
     <>
@@ -147,7 +154,7 @@ function Index() {
               </div>
               <div className="card-body px-4">
                   <div className="d-flex align-items-center mb-3">
-                    <p className="item-width">Frist ticket Creation time:</p>
+                    <p className="item-width">First ticket Creation time:</p>
                     <div className="d-flex align-items-center">
                      
                       {
@@ -178,6 +185,7 @@ function Index() {
               <button disabled={editState ? false : true} className="btn btn-secondary me-5" onClick={() => setEditState(false)}>Cancel</button>
               <button disabled={editState ? false : true} className="btn btn-secondary " onClick={handleSubmit}>Submit</button>
             </div>
+            
           </div>
     </>
   )
