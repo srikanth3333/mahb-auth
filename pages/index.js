@@ -66,8 +66,9 @@ function Index() {
     })
     .then(response => {
       setEditState(false)
-      alert(response.data)
       getData()
+      alert(response.data)
+      location.reload()
     })
     .catch(err => {
       console.log(err)

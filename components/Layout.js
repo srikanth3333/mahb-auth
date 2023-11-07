@@ -6,9 +6,7 @@ import Login from './Login'
 function Layout({children}) {
 
 
-  const [loggedIn,setLoggedIn] = React.useState(false)
-  const [loading,setLoading] = React.useState(false)
-
+  const [loggedIn,setLoggedIn] = React.useState(false);
 
   React.useEffect(() => {
     let token = localStorage.getItem('profile')

@@ -30,13 +30,15 @@ function Header({title,navigate}) {
     <div className="header d-flex align-items-center justify-content-between">
         <div>
           <p className='text-sm text-white'>Last Updated By: {logsData?.updatedBy}</p>
-          <p className='text-sm text-white'>Updated At: {moment(logsData?.updatedAt).format('DD-MM-YYYY - hh:mm')}</p>
+          <p className='text-sm text-white'>Updated At: {moment(logsData?.updatedAt).format('DD-MM-YYYY hh:mm A')}</p>
         </div>
         <div>
           {/* <img src="/icons/Search.png" alt="" className="icon me-3" />
           <img src="/icons/BellNotification.png" alt="" className="icon me-3" />
           <img src="/icons/User.png" alt="" className="icon me-3" /> */}
           <div className="">
+                
+                
                 <button className="btn btn-danger btn-sm ms-3" onClick={() => {
                     localStorage.clear();
                     location.reload()
