@@ -81,9 +81,9 @@ function resetLogoutTimer() {
 
 
     const logout = () => {
-        // localStorage.clear()
-        // location.reload()
-        console.log('lougout')
+        localStorage.clear()
+        location.reload()
+        // console.log('lougout')
     }
 
     startLogoutTimer(logout, 1 * 60 * 1000);
