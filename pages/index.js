@@ -2,16 +2,6 @@ import axios from 'axios'
 import moment from 'moment';
 import React from 'react'
 
-let logoutTimer;
-
-
-function startLogoutTimer(logoutCallback, timeout = 1 * 60 * 1000) {
-    logoutTimer = setTimeout(logoutCallback,timeout)
-}
-
-function resetLogoutTimer() {
-    clearTimeout(logoutTimer)
-}
 
 function Index() {
 
@@ -22,6 +12,18 @@ function Index() {
   const [firstTicketCreationTime,setFirstTicketCreationTime]= React.useState('')
   const [secondTicketCreationTime,setSecondTicketCreationTime]= React.useState('')
   let profile =  JSON.parse(localStorage.getItem('profile'))
+
+  let logoutTimer;
+
+
+function startLogoutTimer(logoutCallback, timeout = 1 * 60 * 1000) {
+    logoutTimer = setTimeout(logoutCallback,timeout)
+}
+
+function resetLogoutTimer() {
+    clearTimeout(logoutTimer)
+}
+
 
   React.useEffect(() => {
     getData()
@@ -66,9 +68,8 @@ function Index() {
     })
     .then(response => {
       setEditState(false)
-      getData()
       alert(response.data)
-      location.reload()
+      getData()
     })
     .catch(err => {
       console.log(err)
@@ -80,8 +81,9 @@ function Index() {
 
 
     const logout = () => {
-        localStorage.clear()
-        location.reload()
+        // localStorage.clear()
+        // location.reload()
+        console.log('lougout')
     }
 
     startLogoutTimer(logout, 1 * 60 * 1000);
