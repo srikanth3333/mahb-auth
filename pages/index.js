@@ -5,7 +5,7 @@ import React from 'react'
 let logoutTimer;
 
 
-function startLogoutTimer(logoutCallback, timeout = 30 * 60 * 1000) {
+function startLogoutTimer(logoutCallback, timeout = 1 * 60 * 1000) {
     logoutTimer = setTimeout(logoutCallback,timeout)
 }
 
@@ -84,7 +84,7 @@ function Index() {
         location.reload()
     }
 
-    startLogoutTimer(logout, 30 * 60 * 1000);
+    startLogoutTimer(logout, 1 * 60 * 1000);
 
     const handleUserActivity = () => {
         resetLogoutTimer();
