@@ -13,6 +13,7 @@ function Login({setLoggedIn}) {
     const [email,setEmail] = React.useState('')
     const [password,setPassword] = React.useState('')
     const [errors,setErrors] = React.useState('')
+    const [count,setCount] = React.useState(0)
     const [loading,setLoading] = React.useState(false)
     let router = useRouter()
 
@@ -53,11 +54,42 @@ function Login({setLoggedIn}) {
 
         })
         .catch(err => {
-            console.log(err)
+            if(err.response?.data?.errors[0]?.errorMessage == 'Wrong password please try again') {
+                alert(err.response?.data?.errors[0]?.errorMessage)
+                setLoading(false)
+                setCount(count + 1)
+                if(count >= 5) {
+                    setCount(0)
+                    blockUser()
+                }
+                return;
+            }
             setLoading(false)
-            alert("Invalid credentials")
+            alert(err.response?.data?.errors[0]?.errorMessage)
         })
         
+    }
+
+
+    const blockUser = async () => {
+        await axios.post(`https://freshdeskdev.myairports.com.my/api/stardesk/user-block?email=${email}&flag=true`,{}, {
+            headers: {
+                'Accept-Language': 'en-US',
+                'Content-Type': 'application/json'
+
+            }
+        })
+        .then(response => {
+            console.log(response)
+            setLoading(false)
+            if(response.message == "success") {
+                alert("")
+            }
+            
+        })
+        .catch(err => {
+            setLoading(false)
+        })
     }
 
 
